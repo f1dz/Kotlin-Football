@@ -20,6 +20,17 @@ class ClubDetail : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initUI()
+
+        val intent = intent
+        club = intent.getParcelableExtra("club")
+        Glide.with(this).load(club.image).into(imageView)
+        nameTextView.text = club.name
+        detailView.text = club.detail
+
+    }
+
+    fun initUI() {
         verticalLayout {
             padding = dip(6)
             gravity = Gravity.CENTER_HORIZONTAL
@@ -32,12 +43,5 @@ class ClubDetail : AppCompatActivity(){
             detailView = textView{ textAlignment = TextView.TEXT_ALIGNMENT_CENTER}
 
         }
-
-        val intent = intent
-        club = intent.getParcelableExtra("club")
-        Glide.with(this).load(club.image).into(imageView)
-        nameTextView.text = club.name
-        detailView.text = club.detail
-
     }
 }
