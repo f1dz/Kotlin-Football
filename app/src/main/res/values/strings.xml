@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dicoding</string>
+    <string name="app_name">Football Club</string>
 
     <string-array name="club_name">
         <item>Barcelona FC</item>
