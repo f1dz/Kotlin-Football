@@ -3,6 +3,7 @@ package `in`.khofid.dicoding.teams
 import `in`.khofid.dicoding.R
 import `in`.khofid.dicoding.R.array.league
 import `in`.khofid.dicoding.api.ApiRepository
+import `in`.khofid.dicoding.detail.TeamDetailActivity
 import `in`.khofid.dicoding.model.Team
 import `in`.khofid.dicoding.utils.invisible
 import `in`.khofid.dicoding.utils.visible
@@ -15,12 +16,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.*
 import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
-import org.jetbrains.anko.sdk27.coroutines.onItemSelectedListener
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
@@ -44,7 +43,7 @@ class TeamsFragment: Fragment(), AnkoComponent<Context>, TeamView {
         spinner.adapter = spinnerAdapter
 
         adapter = TeamsAdapter(teams) {
-            ctx.startActivity<TeamDetailActivity>("club" to it)
+            ctx.startActivity<TeamDetailActivity>("id" to it.teamId)
         }
         listEvent.adapter = adapter
 

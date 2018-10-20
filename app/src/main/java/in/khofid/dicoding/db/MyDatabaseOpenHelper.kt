@@ -30,3 +30,6 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Favorit
         db.dropIndex(Favorite.TABLE_FAVORITE, true)
     }
 }
+
+val Context.database: MyDatabaseOpenHelper
+    get() = MyDatabaseOpenHelper.getInstance(applicationContext)

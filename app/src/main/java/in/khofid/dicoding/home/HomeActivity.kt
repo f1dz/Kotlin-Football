@@ -42,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
         if(savedInstanceState == null){
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, FavoriteTeamsFragment(), FavoriteTeamsFragment::class.java.simpleName)
+                    .replace(R.id.main_container, FavoriteTeamsFragment(), FavoriteTeamsFragment::class.java.simpleName)
                     .commit()
         }
     }
