@@ -2,7 +2,8 @@ package `in`.khofid.dicoding.detail
 
 import `in`.khofid.dicoding.R
 import `in`.khofid.dicoding.R.color.colorAccent
-import `in`.khofid.dicoding.R.id.teams
+import `in`.khofid.dicoding.R.drawable.ic_add_to_favorites
+import `in`.khofid.dicoding.R.drawable.ic_added_to_favorites
 import `in`.khofid.dicoding.api.ApiRepository
 import `in`.khofid.dicoding.db.Favorite
 import `in`.khofid.dicoding.db.database
@@ -26,6 +27,7 @@ import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
@@ -73,17 +75,22 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.detail_menu, menu)
         menuItem = menu
+        setFavorite()
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
-            R.id.home -> {
+            android.R.id.home -> {
                 finish()
                 true
             }
             R.id.add_to_favorite -> {
-                addToFavorite()
+                if(isFavorite) removeFromFavorite() else addToFavorite()
+
+                isFavorite = !isFavorite
+                setFavorite()
+
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -101,6 +108,26 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
             snackbar(swipeRefresh, "Added to favorite").show()
         } catch (e: SQLiteConstraintException) {
             snackbar(swipeRefresh, e.localizedMessage).show()
+        }
+    }
+
+    private fun removeFromFavorite(){
+        try {
+            database.use {
+                delete(Favorite.TABLE_FAVORITE, "(TEAM_ID = {id})",
+                "id" to id)
+            }
+            snackbar(swipeRefresh, "Removed from favorite").show()
+        } catch (e: SQLiteConstraintException) {
+            snackbar(swipeRefresh, e.localizedMessage)
+        }
+    }
+
+    private fun setFavorite(){
+        if(isFavorite){
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_added_to_favorites)
+        } else {
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_add_to_favorites)
         }
     }
 
