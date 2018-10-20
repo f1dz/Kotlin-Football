@@ -1,4 +1,4 @@
-package `in`.khofid.dicoding
+package `in`.khofid.dicoding.teams
 
 import `in`.khofid.dicoding.api.ApiRepository
 import `in`.khofid.dicoding.api.TheSportDBApi
@@ -7,9 +7,9 @@ import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class MainPresenter(private val view: MainView,
-                    private val apiRepository: ApiRepository,
-                    private val gson: Gson) {
+class TeamsPresenter(private val view: TeamView,
+                     private val apiRepository: ApiRepository,
+                     private val gson: Gson) {
 
     fun getTeamList(league: String?){
         view.showLoading()
