@@ -75,7 +75,6 @@ class TeamsFragment: Fragment(), AnkoComponent<Context>, TeamView {
             rightPadding = dip(16)
 
             spinner = spinner()
-            spinner.id = R.id.spinner
             swipeRefresh = swipeRefreshLayout {
                 setColorSchemeResources(R.color.colorAccent,
                         android.R.color.holo_green_light,
@@ -89,7 +88,6 @@ class TeamsFragment: Fragment(), AnkoComponent<Context>, TeamView {
                         lparams(width = matchParent, height = wrapContent)
                         layoutManager = LinearLayoutManager(ctx)
                     }
-                    listEvent.id = R.id.recycler_view
 
                     progressBar = progressBar {}.lparams {
                         centerHorizontally()
